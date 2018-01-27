@@ -9,6 +9,15 @@ import { Geolocation } from '@ionic-native/geolocation';
 export class HomePage {
   lat: any;
   lng: any;
+
+  timeout() {
+      var that = this;
+      setTimeout(function () {
+          console.log('Test');
+          that.timeout();
+      }, 3000);
+  };
+
   constructor(public navCtrl: NavController, public ggg: Geolocation) {
 
   }
@@ -19,6 +28,7 @@ export class HomePage {
         this.lat = pos.coords.latitude;
        // this.lat = 15;
        this.lng = pos.coords.longitude;
+       this.timeout();
     }).catch( err => console.log(err));
   }
 

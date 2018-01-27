@@ -59,17 +59,26 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.ggg = ggg;
     }
+    HomePage.prototype.timeout = function () {
+        var that = this;
+        setTimeout(function () {
+            console.log('Test');
+            that.timeout();
+        }, 3000);
+    };
+    ;
     HomePage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.ggg.getCurrentPosition().then(function (pos) {
             _this.lat = pos.coords.latitude;
             // this.lat = 15;
             _this.lng = pos.coords.longitude;
+            _this.timeout();
         }).catch(function (err) { return console.log(err); });
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/hakim/Desktop/Qaharman/tracker/src/pages/home/home.html"*/`<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Geolocation Demo\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <p>Lat: {{ lat  }}</p>\n  <p>Lng: {{ lng }}</p>\n</ion-content>\n`/*ion-inline-end:"/Users/hakim/Desktop/Qaharman/tracker/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/home/nurik/Документы/work/Qaharman/src/pages/home/home.html"*/`<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Geolocation Demo\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <p>Lat: {{ lat  }}</p>\n  <p>Lng: {{ lng }}</p>\n</ion-content>\n`/*ion-inline-end:"/home/nurik/Документы/work/Qaharman/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]])
     ], HomePage);
@@ -191,7 +200,7 @@ var MyApp = (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/hakim/Desktop/Qaharman/tracker/src/app/app.html"*/`<ion-nav [root]="rootPage"></ion-nav>\n`/*ion-inline-end:"/Users/hakim/Desktop/Qaharman/tracker/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/nurik/Документы/work/Qaharman/src/app/app.html"*/`<ion-nav [root]="rootPage"></ion-nav>\n`/*ion-inline-end:"/home/nurik/Документы/work/Qaharman/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
