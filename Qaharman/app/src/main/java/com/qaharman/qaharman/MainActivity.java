@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     TextView tvEnabledGPS;
     TextView tvStatusGPS;
@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     TextView tvLocationNet;
 
     private LocationManager locationManager;
+    private MapView mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,22 @@ public class MainActivity extends Activity {
         tvLocationNet = (TextView) findViewById(R.id.tvLocationNet);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Mapbox.getInstance(this, "pk.eyJ1IjoiaGFrZWVtcSIsImEiOiJjamN4emtmaXA0ZjdyMnpuMGpmbWw5NzVmIn0.t-PITYdVFUfFHCOUaUIYKA");
+        setContentView(R.layout.activity_main);
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+    }
+
+    @Override
+      public void onStart() {
+      super.onStart();
+      mapView.onStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mapView.onResume();
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             Toast toast = Toast.makeText(this, "Permission failed", Toast.LENGTH_SHORT);
@@ -62,7 +74,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        mapView.onPause();
         locationManager.removeUpdates(locationListener);
+    }
+
+    @Override
+      public void onStop() {
+      super.onStop();
+      mapView.onStop();
     }
 
     private LocationListener locationListener = new LocationListener() {
@@ -89,6 +108,24 @@ public class MainActivity extends Activity {
             }
 
             showLocation(locationManager.getLastKnownLocation(provider));
+        }
+
+        @Override
+          public void onLowMemory() {
+          super.onLowMemory();
+          mapView.onLowMemory();
+        }
+
+        @Override
+          protected void onDestroy() {
+          super.onDestroy();
+          mapView.onDestroy();
+        }
+
+        @Override
+          protected void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            mapView.onSaveInstanceState(outState);
         }
 
         @Override
