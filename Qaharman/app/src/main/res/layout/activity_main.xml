@@ -20,7 +20,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include
+        layout="@layout/content_main"
+        android:layout_width="382dp"
+        tools:layout_editor_absoluteX="2dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
